@@ -1,0 +1,25 @@
+{
+  "name": "canvasingwithp5",
+  "version": "1.0.0",
+  "description": "A collaborative canvas that will utilise socket.io, node.js, p5,js for drawing",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BowbiOner/DrawW-me.git"
+  },
+  "author": "Rory Plunkett Boyle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BowbiOner/DrawW-me/issues"
+  },
+  "homepage": "https://github.com/BowbiOner/DrawW-me#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "nodemon": "^1.11.0",
+    "p5": "^0.5.8",
+    "socket.io": "^1.7.3"
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>drawWme</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="main.css" type="text/css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.8/p5.js"></script>
+    <script src="artists.js"></script>
+    <script src="sketch.js"></script>
+    <script>
+        var socket = io.connect()
+            , pre = document.querySelectorAll("pre")[0]
+            , input = document.querySelectorAll("input")[0]
+            , button = document.querySelectorAll("button")[0];
+        button.addEventListener("click", function () {
+            socket.emit('ping', input.value);
+        });
+        socket.on("pong", function (data) {
+            pre.innerHTML += data;
+        });
+        //after we get connected, display the id of the client
+        socket.on('connect', function () {
+            document.getElementById('clientId').innerHTML = "This clients ID is " + socket.id;
+        });
+    </script>
+</head>
+
+<body>
+    <h1>welkom to drawWme</h1>
+    <input placeholder="ping something" />
+    <button>ping!</button> <pre></pre>
+    <!--
+<canvas id="drawCanvas"></canvas>
+<div class="colors">
+    <div class="color red"></div>
+    <div class="color yellow"></div>
+    <div class="color green"></div>
+    <div class="color blue"></div>
+</div>
+-->
+    <div id='clientId'></div>
+</body>
+
+</html>
