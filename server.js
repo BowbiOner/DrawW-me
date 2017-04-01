@@ -22,10 +22,13 @@ io.on('connection', function (client) {
     console.log('client connected ' + client.id);
     var uID = client.client.id;
     //    console.log(uID);
-    client.emit('message', "this is a test");
-});
-io.on('mouse', function (data) {
-    console.log(data);
+    //    client.emit('message', "this is a test");
+    client.on('mouse', function (data) {
+        console.log(data);
+        //        var newdata = client.broadcast.emit(data);
+        client.broadcast.emit(data);
+        //        console.log("new data: " + newdata);
+    });
 });
 //io.emit('message', "this is a test");
 //start our web server and socket.io server listening

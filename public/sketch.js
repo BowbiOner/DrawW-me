@@ -5,7 +5,13 @@ function setup() {
     var fullH = 500;
     createCanvas(fullW, fullH);
     background(52);
-    client = io.connect('http://127.0.0.1:3000');
+    client = io.connect();
+    client.on('mouse', function (data) {
+        noStroke();
+        fill(255, 10, 200);
+        ellipse(data.x, data.y, 20, 20);
+        console.log("new drwaing data: " + data);
+    });
 }
 
 function draw() {}
