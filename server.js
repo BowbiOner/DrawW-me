@@ -10,7 +10,7 @@ var io = require('socket.io')(server);
 //variable to store all the strokes
 var drawnLines = [];
 //variable to stor users
-var connectedUsers = {};
+var connectedUsers = [];
 //redirect any client who connects to our index.html
 app.use(express.static(__dirname + '/public'));
 //
@@ -21,14 +21,18 @@ app.get('/' + function (req, res, next) {
 io.on('connection', function (client) {
     console.log('client connected ' + client.id);
     var uID = client.client.id;
+    connectedUsers.push(client.id);
+    io.emit('connectedClients', connectedUsers);
     //    console.log(uID);
     //    client.emit('message', "this is a test");
-    client.on('mouse', function (data) {
+    client.on('mouse', sendDrawing);
+
+    function sendDrawing(data) {
         console.log(data);
         //        var newdata = client.broadcast.emit(data);
-        client.broadcast.emit(data);
+        client.broadcast.emit('mouse', data);
         //        console.log("new data: " + newdata);
-    });
+    }
 });
 //io.emit('message', "this is a test");
 //start our web server and socket.io server listening

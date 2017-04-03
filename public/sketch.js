@@ -1,4 +1,6 @@
 var client;
+//is any key
+var value = 0;
 
 function setup() {
     var fullW = 900;
@@ -27,4 +29,14 @@ function mouseDragged() {
     }
     console.log(data);
     client.emit('mouse', data);
+}
+
+function keyPressed() {
+    if (value === 0) {
+        clear();
+        background(52);
+    }
+    else {
+        clear();
+    }
 }
