@@ -5,17 +5,21 @@
     <title>drawWme</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="main.css" type="text/css" />
+    <!--    require socket.io in the client so that ce can connect to the server through sockets-->
     <script src="/socket.io/socket.io.js"></script>
-    <!--    link to the cdn that will give us access to -5-->
+    <!--    link to the cdn that will give us access to p5-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.8/p5.js"></script>
     <script src="artists.js"></script>
-    <script src="sketch.js"></script>
     <script>
+        //create a variable that will connect to open sockets on the server
         var socket = io.connect();
         //after we get connected, display the id of the client
         socket.on('connect', function () {
+            //get the div called client Id and write it to the page
             document.getElementById('clientId').innerHTML = "This clients ID is " + socket.id;
+            //listen for a message called connectedClients then call execute the anon function
             socket.on('connectedClients', function (data) {
+                    //get the div called clientList and poorly write the clients to the list
                     document.getElementById('clientList').innerHTML = "Clients list is: " + data;
                 })
                 //            socket.emit('clearCan', clearcanvas);
@@ -26,15 +30,6 @@
 
 <body>
     <h1>welkom to drawWme<p> to clear the canvas press any key on your keyboard</p></h1>
-    <!--<canvas id="drawCanvas"></canvas>-->
-    <div class="colors">
-        <!--        <button id="clearCan">clear</button>-->
-        <!-- <div id="clearCan" class="color red">clear</div> -->
-        <!--
-        <div class="color yellow"></div>
-        <div class="color green"></div>
-        <div class="color blue"></div>
---></div>
     <div id='clientId'></div>
     <div id='clientList'></div>
 </body>
